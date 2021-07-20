@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTutorial } from "../actions/tutorials";
+import { Redirect } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Add = () => {
+
     const initialTutorialState = {
         id: null,
         title: "",
@@ -44,6 +47,12 @@ const Add = () => {
         setSubmitted(false);
     };
 
+    const { user: currentUser } = useSelector((state) => state.auth);
+
+    if (!currentUser) {
+        return <Redirect to="/login" />;
+    }
+
     return (
         <div className="submit-form">
             {submitted ? (
@@ -81,7 +90,7 @@ const Add = () => {
                         />
                     </div>
 
-                    <button onClick={saveTutorial} className="btn btn-success">
+                    <button onClick={saveTutorial} className="btn btn-success mt-sm-3">
                         Submit
                     </button>
                 </div>

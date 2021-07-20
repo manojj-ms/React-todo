@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTutorial, deleteTutorial } from "../actions/tutorials";
 import TutorialDataService from "../services/TutorialService";
+import { Redirect } from 'react-router-dom';
 
 const Tutorial = (props) => {
     const initialTutorialState = {
@@ -77,6 +78,13 @@ const Tutorial = (props) => {
             });
     };
 
+    const { user: currentUser } = useSelector((state) => state.auth);
+
+    if (!currentUser) {
+        return <Redirect to="/login" />;
+    }
+
+
     return (
         <div>
             {currentTutorial ? (
@@ -111,13 +119,13 @@ const Tutorial = (props) => {
 
 
 
-                    <button className="btn btn-danger" onClick={removeTutorial}>
+                    <button className="btn btn-danger m-2" onClick={removeTutorial}>
                         Delete
                     </button>
 
                     <button
                         type="submit"
-                        className="btn btn-success"
+                        className="btn btn-success m-2"
                         onClick={updateContent}
                     >
                         Update

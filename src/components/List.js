@@ -5,9 +5,11 @@ import {
     findTutorialsByTitle,
     deleteAllTutorials,
 } from "../actions/tutorials";
+import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 const List = () => {
+
     const [currentTutorial, setCurrentTutorial] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [searchTitle, setSearchTitle] = useState("");
@@ -49,6 +51,12 @@ const List = () => {
         refreshData();
         dispatch(findTutorialsByTitle(searchTitle));
     };
+
+    const { user: currentUser } = useSelector((state) => state.auth);
+
+    if (!currentUser) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <div className="list row">
@@ -112,12 +120,6 @@ const List = () => {
                                 <strong>Description:</strong>
                             </label>{" "}
                             {currentTutorial.description}
-                        </div>
-                        <div>
-                            <label>
-                                <strong>Status:</strong>
-                            </label>{" "}
-                            {currentTutorial.published ? "Published" : "Pending"}
                         </div>
 
                         <Link
