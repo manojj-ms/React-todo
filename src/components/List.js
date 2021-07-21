@@ -71,7 +71,7 @@ const List = () => {
                     />
                     <div className="input-group-append">
                         <button
-                            className="btn btn-outline-secondary"
+                            className="btn btn-outline-secondary m-1"
                             type="button"
                             onClick={findByTitle}
                         >
@@ -124,7 +124,7 @@ const List = () => {
 
                         <Link
                             to={"/tutorials/" + currentTutorial.id}
-                            className=""
+                            className="btn btn-info btn-sm mt-2"
                         >
                             Edit
                         </Link>

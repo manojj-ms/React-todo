@@ -17,10 +17,6 @@ export default function (state = initialState, action) {
 
     switch (type) {
         case REGISTER_SUCCESS:
-            return {
-                ...state,
-                isLoggedIn: false,
-            };
         case REGISTER_FAIL:
             return {
                 ...state,
@@ -33,11 +29,6 @@ export default function (state = initialState, action) {
                 user: payload.user,
             };
         case LOGIN_FAIL:
-            return {
-                ...state,
-                isLoggedIn: false,
-                user: null,
-            };
         case LOGOUT:
             return {
                 ...state,
