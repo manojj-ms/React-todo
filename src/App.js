@@ -7,10 +7,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Add from "./components/Add";
 import List from "./components/List";
 import Tutorial from "./components/Tutorial";
-
+import Chat from "./components/Chat";
 import Login from "./components/Login";
 import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
 import Register from "./components/Register";
 
 
@@ -47,7 +46,11 @@ function App() {
                 Add
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to={"/chat"} className="nav-link">
+                Chat
+              </Link>
+            </li>
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
                 LogOut
@@ -71,19 +74,17 @@ function App() {
         )}
 
       </nav>
-
-
-
       <div className="container mt-3">
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/tutorials" component={List} />
           <Route exact path="/add" component={Add} />
+          <Route exact path="/chat" component={Chat} />
           <Route path="/tutorials/:id" component={Tutorial} />
         </Switch>
       </div>
-    </Router>
+    </Router >
   );
 }
 
